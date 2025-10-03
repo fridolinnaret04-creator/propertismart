@@ -1,32 +1,25 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Register - PropertiSmart</title>
+  <meta charset="UTF-8">
+  <title>Register PropertiSmart</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="margin:0; font-family:Arial, sans-serif; background:url('assets/login-bg.png') no-repeat center center/cover; height:100vh; display:flex; justify-content:center; align-items:center;">
+<body>
+  <main>
+    <form class="form-box">
+      <h2>Register</h2>
+      <label>Nama</label>
+      <input type="text" placeholder="Nama lengkap">
 
-    <div style="background:rgba(255,255,255,0.95); padding:30px; border-radius:10px; width:380px; text-align:center;">
-        <img src="assets/logo.png" alt="Logo" width="200" style="margin-bottom:15px;">
-        <h2 style="margin-bottom:20px; color:#2c3e50;">Buat Akun Baru</h2>
-        
-        <form action="login.html" method="post">
-            <input type="text" name="fullname" placeholder="Nama Lengkap" required
-                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
-            <input type="email" name="email" placeholder="Email" required
-                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
-            <input type="text" name="username" placeholder="Username" required
-                   style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
-            <input type="password" name="password" placeholder="Password" required
-                   style="width:100%; padding:10px; margin-bottom:20px; border:1px solid #ccc; border-radius:5px;">
-            
-            <button type="submit" style="width:100%; padding:10px; background:#2980b9; color:white; border:none; border-radius:5px; font-size:16px; cursor:pointer;">
-                Register
-            </button>
-        </form>
+      <label>Email</label>
+      <input type="email" placeholder="Email">
 
-        <p style="margin-top:15px;">Sudah punya akun? <a href="login.html">Login</a></p>
-    </div>
+      <label>Password</label>
+      <input type="password" placeholder="Password">
 
+      <button type="submit">Daftar</button>
+    </form>
+  </main>
 </body>
 </html>
