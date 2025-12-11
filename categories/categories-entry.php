@@ -1,93 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Tambah Kategori</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8fafc;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #004080;
-      color: white;
-      text-align: center;
-      padding: 15px;
-    }
-    main {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-    form {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0 15px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button, .btn-back {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      margin-right: 10px;
-    }
-    button:hover, .btn-back:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Kategori Properti</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f5f9;
+            margin: 0;
+        }
+
+        h1 {
+            background: #004080;
+            color: white;
+            padding: 20px 30px;
+            margin: 0;
+        }
+
+        .form-container {
+            width: 40%;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 18px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #0066ff;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #004080;
+            color: white;
+            margin-left: 10px;
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <h1>Tambah Kategori Properti</h1>
-    <nav>
-      <a href="../admin.php" style="color:white;">Dashboard</a> |
-      <a href="categories.php" style="color:white;">Kategori</a>
-    </nav>
-  </header>
 
-  <main>
-    <form action="categories-proses.php" method="post" id="kategoriForm">
-      <label for="nama">Nama Kategori:</label>
-      <input type="text" name="nama" id="nama" placeholder="Contoh: Ruko">
+<h1>Tambah Kategori Properti</h1>
 
-      <label for="deskripsi">Deskripsi:</label>
-      <textarea name="deskripsi" id="deskripsi" placeholder="Masukkan deskripsi kategori"></textarea>
+<div class="form-container">
 
-      <button type="submit" id="btnSimpan">Simpan</button>
-      <a href="categories.php" class="btn-back" id="btnKembali">Kembali</a>
+    <form action="categories-proses.php" method="POST" enctype="multipart/form-data">
+
+        <label>Nama Kategori:</label>
+        <input type="text" name="nama_kategori" required>
+
+        <label>Deskripsi:</label>
+        <textarea name="deskripsi" rows="4" required></textarea>
+
+        <label>Harga Properti:</label>
+        <input type="text" name="harga" placeholder="Contoh: Rp 850.000.000" required>
+
+        <label>Foto Properti:</label>
+        <input type="file" name="foto" accept="image/*" required>
+
+        <button class="btn btn-primary" type="submit" name="simpan">Simpan</button>
+        <a href="categories.php" class="btn btn-secondary">Kembali</a>
+
     </form>
-  </main>
 
-  <script>
-    function showToast(message) {
-      alert(message); // simple, tetap unsur lama validasi
-    }
+</div>
 
-    const form = document.getElementById('kategoriForm');
-    form.addEventListener('submit', (e) => {
-      const nama = document.getElementById('nama').value.trim();
-      const deskripsi = document.getElementById('deskripsi').value.trim();
-
-      if (!nama || !deskripsi) {
-        e.preventDefault();
-        showToast('Harap isi semua kolom!');
-      }
-    });
-  </script>
 </body>
 </html>

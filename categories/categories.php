@@ -1,3 +1,7 @@
+<?php
+session_start();
+include "../koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -5,115 +9,89 @@
   <title>Kategori Properti</title>
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    .empty-message {
-      text-align: center;
-      color: #666;
-      font-style: italic;
-      margin-top: 10px;
-    }
-    .btn-clear {
-      background: #b71c1c;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn-clear:hover { background: #d32f2f; }
-    table tr:hover {
-      background-color: #f0f8ff;
-      cursor: pointer;
-      transition: background 0.3s;
+    .empty-message { text-align:center; color:#666; font-style:italic; margin-top:10px; }
+    .btn-clear { background:#b71c1c; color:white; padding:8px 12px; border-radius:5px; }
+    .btn-clear:hover { background:#d32f2f; }
+    table tr:hover { background:#f0f8ff; cursor:pointer; }
+
+    /* FOTO */
+    .foto-properti {
+        width: 100px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid #ccc;
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Daftar Kategori Properti</h1>
-    <nav>
-      <a href="../admin.php">Dashboard</a>
-      <a href="categories.php">Kategori</a>
-      <a href="../transaction/transaction.php">Transaksi</a>
-    </nav>
-  </header>
 
-  <main>
-    <table id="kategoriTable">
-      <thead>
-        <tr>
-          <th>Nama Kategori</th>
-          <th>Deskripsi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Rumah</td><td>Hunian keluarga</td></tr>
-        <tr><td>Apartemen</td><td>Hunian vertikal</td></tr>
-        <tr><td>Tanah</td><td>Lahan untuk investasi</td></tr>
-        <tr><td>Ruko</td><td>Tempat usaha sekaligus hunian</td></tr>
-      </tbody>
-    </table>
+<header>
+  <h1>Daftar Kategori Properti</h1>
+  <nav>
+    <a href="../admin.php">Dashboard</a>
+    <a href="categories.php">Kategori</a>
+    <a href="../transaction/transaction.php">Transaksi</a>
+  </nav>
+</header>
 
-    <div style="margin-top:15px;">
-      <a href="categories-entry.php" class="btn">+ Tambah Kategori</a>
-      <button class="btn-clear" id="clearDataBtn">🗑 Hapus Semua Data Tambahan</button>
-    </div>
+<main>
 
-    <p class="empty-message" id="emptyMessage" style="display:none;">
-      Belum ada kategori tambahan yang disimpan.
-    </p>
-  </main>
+<table id="kategoriTable">
+<thead>
+  <tr>
+    <th>Nama Kategori</th>
+    <th>Deskripsi</th>
+    <th>Foto</th>
+    <th>Aksi</th>
+  </tr>
+</thead>
 
-  <script>
-    const tableBody   = document.querySelector("#kategoriTable tbody");
-    const emptyMessage = document.getElementById("emptyMessage");
-    const clearBtn     = document.getElementById("clearDataBtn");
-    const key          = "properti_kategori";
+<tbody>
+<?php
+$query = mysqli_query($koneksi, "SELECT * FROM kategori ORDER BY id_kategori DESC");
+if (mysqli_num_rows($query) == 0) {
+    echo "<tr><td colspan='4' style='text-align:center;color:#777;'>Belum ada data kategori</td></tr>";
+}
+while ($row = mysqli_fetch_assoc($query)) {
+?>
+<tr>
+  <td><?= $row['nama_kategori'] ?></td>
 
-    const storedData = JSON.parse(localStorage.getItem(key) || "[]");
+  <td><?= $row['deskripsi'] ?></td>
 
-    if (storedData.length > 0) {
-      storedData.forEach(item => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${item.nama}</td>
-          <td>${item.deskripsi}</td>
-        `;
-        tableBody.appendChild(row);
-      });
-      emptyMessage.style.display = "none";
-    } else {
-      emptyMessage.style.display = "block";
-    }
+  <td>
+    <?php 
+        $filepath = "../img_categories/" . $row['foto'];
 
-    tableBody.addEventListener("click", (event) => {
-      const clickedRow = event.target.closest("tr");
-      if (clickedRow) {
-        const nama = clickedRow.cells[0].textContent;
-        const deskripsi = clickedRow.cells[1].textContent;
-        alert(`📋 Detail Kategori:\n\nNama: ${nama}\nDeskripsi: ${deskripsi}`);
-      }
-    });
+        if ($row['foto'] != "" && file_exists($filepath)) {
+    ?>
+        <img src="<?= $filepath ?>" class="foto-properti" 
+             style="width:80px; height:60px; object-fit:cover; border-radius:6px;">
+    <?php 
+        } else {
+            echo "<span style='color:#888;'>(Tidak ada foto)</span>";
+        }
+    ?>
+</td>
 
-    tableBody.addEventListener("mouseover", (event) => {
-      const row = event.target.closest("tr");
-      if (row) row.style.backgroundColor = "#e3f2fd";
-    });
+  <td>
+    <a href="categories-edit.php?id=<?= $row['id_kategori'] ?>" class="btn">Edit</a>
+    <a href="categories-delete.php?id=<?= $row['id_kategori'] ?>" 
+       class="btn-clear"
+       onclick="return confirm('Yakin ingin menghapus kategori ini?')">Hapus</a>
+  </td>
+</tr>
+<?php } ?>
+</tbody>
+</table>
 
-    tableBody.addEventListener("mouseout", (event) => {
-      const row = event.target.closest("tr");
-      if (row) row.style.backgroundColor = "";
-    });
+<div style="margin-top:15px;">
+  <a href="categories-entry.php" class="btn">+ Tambah Kategori</a>
+</div>
 
-    clearBtn.addEventListener("click", () => {
-      const confirmDelete = confirm("Yakin ingin menghapus semua kategori tambahan?");
-      if (confirmDelete) {
-        localStorage.removeItem(key);
-        alert("✅ Semua kategori tambahan telah dihapus!");
-        location.reload();
-      } else {
-        alert("❌ Penghapusan dibatalkan.");
-      }
-    });
-  </script>
+</main>
+
 </body>
 </html>
