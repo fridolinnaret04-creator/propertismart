@@ -1,0 +1,208 @@
+/* ================================
+   GLOBAL STYLING
+================================ */
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #f1f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Heading Halaman */
+h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form Control */
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+/* Button Global */
+.btn-primary {
+    background: #004080;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #003366;
+}
+
+.btn-secondary {
+    background: #555;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: #333;
+}
+
+/* Card Putih Tengah */
+.card-center {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 70%;
+    margin: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background: #004080;
+    transition: 0.4s;
+    padding-top: 20px;
+}
+
+.sidebar.active {
+    width: 60px;
+}
+
+.sidebar .logo-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sidebar .logo-details i {
+    font-size: 26px;
+    margin-right: 10px;
+}
+
+.sidebar ul li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    text-decoration: none;
+    color: #fff;
+    padding-left: 20px;
+    transition: 0.3s;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+    background: #013363;
+    border-left: 4px solid #ffb700;
+}
+
+.sidebar ul li a i {
+    min-width: 35px;
+    font-size: 20px;
+}
+
+/* ================================
+   TOP NAVBAR
+================================ */
+
+.topbar {
+    width: calc(100% - 250px);
+    background: #004080;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 250px;
+    transition: 0.4s;
+}
+
+.sidebar.active ~ .topbar {
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+.admin_name {
+    font-weight: bold;
+}
+
+/* ================================
+   CONTENT WRAPPER
+================================ */
+
+.home-section {
+    margin-left: 250px;
+    padding-top: 75px;
+    transition: 0.4s;
+}
+
+.sidebar.active ~ .home-section {
+    margin-left: 60px;
+}
+
+.home-content {
+    padding: 25px;
+}
+
+/* ================================
+   TABLE STYLING
+================================ */
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-custom thead {
+    background: #004080;
+    color: white;
+}
+
+.table-custom th,
+.table-custom td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.table-custom tbody tr:hover {
+    background: #f5f6fa;
+}
+
+/* ================================
+   IMAGE PREVIEW
+================================ */
+
+.thumbnail {
+    width: 90px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
